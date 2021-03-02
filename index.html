@@ -14,19 +14,21 @@
             <p>You score: </p> <p id="score"></p>
         </div>
         <div id="buttons">
-            <button id="zero"></button>
-            <button id="one"></button>
-            <button id="two"></button>
-            <button id="three"></button>
+            <button class= "circle"></button>
+            <button class= "circle"></button>
+            <button class= "circle"></button>
+            <button class= "circle"></button>
         </div>
-        <button class="controls" id = "start">Start</button>
-        <button class="controls" id = "stop" onclick= "endgame()">Stop</button>
+        <button class="controls" id = "start" onclick = "startGame()">Start</button>
+        <button class="controls" id = "stop" onclick= "endGame()">Stop</button>
     </section>
     <section id="result">
-        <div>
-            <p>Opps, gmae over</p>
-            <p>Your score: </p>
-            <button type="button" onclick="close()">Close</button>
+        <div class= "gameoverbox">
+            <p>Whoopsey daisy, game over! </p>
+            <p id="endScore"></p>
+            <div>
+                <button type="button" id="close" onclick="reloadGame()">Close</button>
+            </div>
         </div>
     </section>
     <script src="main.js"></script> 

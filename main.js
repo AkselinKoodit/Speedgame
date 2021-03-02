@@ -1,53 +1,73 @@
-let score = 0;
-let start = document.getElementById("start");
+let buttons = document.querySelectorAll(".circle");
+let scoredisplay = document.getElementById("score");
 let overlay = document.getElementById("result");
+let gameover = document.getElementById("endScore");
+let score = 0;
+let close = document.getElementById("close");
 let active = 0;
+let speed = 1200;
 
-document.getElementById("score").innerHTML = score;
-let zero = document.getElementById("zero");
-let one = document.getElementById("one");
-let two = document.getElementById("two");
-let three = document.getElementById("three");
+buttons[0].onclick = function () {
+  clicked(0);
+};
+buttons[1].onclick = function () {
+  clicked(1);
+};
+buttons[2].onclick = function () {
+  clicked(2);
+};
+buttons[3].onclick = function () {
+  clicked(3);
+};
 
-zero.addEventListener("click", addScore);
-one.addEventListener("click", addScore);
-two.addEventListener("click", addScore);
-three.addEventListener("click", addScore);
+const clicked = (i) => {
+  console.log("clicked:", i);
+  if (i === active) {
+    score++;
+    scoredisplay.textContent = score;
+    speed *= 0.9;
+  } else {
+    console.log("Missed!");
+    endGame();
+  }
+};
 
-function addScore() {
-  score++;
-  console.log(score);
-  document.getElementById("score").innerHTML = score;
-}
+const startGame = () => {
+  console.log("game started");
+  let nextActive = pickNew(active);
+
+  buttons[nextActive].classList.toggle("active");
+  buttons[active].classList.remove("active");
+
+  active = nextActive;
+
+  console.log("Current active: " + active);
+
+  timer = setTimeout(startGame, speed);
+
+  function pickNew(active) {
+    let nextActive = getRandom(0, 3);
+    if (nextActive != active) {
+      return nextActive;
+    } else {
+      return pickNew(active);
+    }
+  }
+};
 
 function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-console.log(getRandom(0, 3));
+const endGame = () => {
+  clearTimeout(timer);
+  console.log("game over! Your score is " + score);
+  overlay.style.visibility = "visible";
+  gameover.textContent = "Your score: " + score;
+};
 
-start.addEventListener("click", () => {
-  let gameOn = setInterval(game, 500);
-  let stop = document.getElementById("stop").addEventListener("click", () => {
-    clearInterval(gameOn);
-    zero.classList.add("zeroActive");
-  });
-});
-
-function game() {
-  let chosen = getRandom(0, 4);
-  console.log(chosen);
-  zero.classList.remove("zeroActive");
-  one.classList.remove("oneActive");
-  two.classList.remove("twoActive");
-  three.classList.remove("threeActive");
-  if (chosen === 0) {
-    if (zero.classList.conta) zero.classList.add("zeroActive");
-  } else if (chosen === 1) {
-    one.classList.add("oneActive");
-  } else if (chosen === 2) {
-    two.classList.add("twoActive");
-  } else if (chosen === 3) {
-    three.classList.add("threeActive");
-  }
-}
+// close.addEventListener("click", reloadGame);
+const reloadGame = () => {
+  console.log("reload happened");
+  window.location.reload();
+};
