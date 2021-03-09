@@ -17,6 +17,7 @@ h1 {
   padding: 50px;
   margin: 20px;
   background-color: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
 }
 .circle:hover {
   border: 2px solid #333;
@@ -48,6 +49,7 @@ h1 {
     rgba(228, 226, 226, 0.616),
     rgba(255, 0, 0, 0.315)
   );
+  cursor: pointer;
 }
 .controls:hover {
   border: 2px solid black;
@@ -76,7 +78,12 @@ p {
     rgba(228, 226, 226, 0.616),
     rgba(255, 0, 0, 0.315)
   );
+  cursor: pointer;
 }
 .invisible {
   display: none;
+}
+.clickMe {
+  pointer-events: auto;
+  cursor: pointer;
 }
