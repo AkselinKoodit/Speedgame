@@ -7,6 +7,8 @@ let close = document.getElementById("close");
 let active = 0;
 let speed = 1200;
 
+document.getElementById("stop").classList.add("invisible");
+
 buttons[0].onclick = function () {
   clicked(0);
 };
@@ -33,6 +35,11 @@ const clicked = (i) => {
 };
 
 const startGame = () => {
+  //changing the visible button:
+  document.getElementById("start").classList.add("invisible");
+
+  document.getElementById("stop").classList.remove("invisible");
+
   console.log("game started");
   let nextActive = pickNew(active);
 

@@ -77,3 +77,6 @@ p {
     rgba(255, 0, 0, 0.315)
   );
 }
+.invisible {
+  display: none;
+}
